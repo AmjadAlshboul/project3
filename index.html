@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <style>
+	body{
+		background-color: rgb(20, 20, 25);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+	}
+	
+	main{
+		display: flex;
+		background: radial-gradient(circle at top, hsl(213, 23%, 16%), hsl(213, 23%, 8.5%));
+		height: 350px;
+		width: 350px;
+		border-radius: 30px;
+}
+
+	.content{
+		padding: 0 10%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+
+	.icon-container{
+		background-color: hsl(213, 23%, 20%);
+		display: flex;
+		width: fit-content;
+		height: fit-content;
+		border-radius: 100px;
+		padding: 12px;
+		margin-top: 20px;
+	}
+	
+	.icon{
+		height: 12px;
+	}
+	
+	h1{
+		color: white;
+		font-weight: bold;
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+	
+	.text{
+		color: rgb(130, 130, 130);
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 20px;
+	}
+	
+	.rating-options{
+		margin-bottom: 30px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	.rating-button{
+		background-color: hsl(213, 23%, 20%);
+		height: 40px;
+		width: 40px;
+		border-radius: 500px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: rgb(130, 130, 130);
+		font-weight: bold;
+	}
+	
+	.rating-button:hover{
+		background-color: orange;
+		color: white;
+		cursor: pointer;
+	}
+	
+	.is-selected{
+		background-color: grey;
+		color: white;
+	}
+	
+	.submit-button{
+		background-color: orange;
+		padding: 10px 120px;
+		border-radius: 50px;
+		color: white;
+		font-weight: bold;
+	}
+	
+	.submit-button:hover{
+		background-color: white;
+		color: orange;
+		cursor: pointer;
+	}
+	
+	.thank-you-image{
+		height: 90px;
+	}
+	
+	.section1-class{
+		align-self: center;
+		background-color: transparent;
+		margin-top: 10px;
+	}
+	
+	.section2-class{
+		align-self: center;
+		background-color: hsl(213, 23%, 20%);
+		padding: 6px 18px;
+		border-radius: 500px;
+		margin-bottom: 20px;
+	}
+	
+	.user-rating{
+		color: orange;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	
+	.section3-class{
+		margin-bottom: 20px;
+	}
+	
+	.thank-you{
+		color: white;
+		font-weight: bold;
+		font-size: 24px;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+	
+	.thank-you-speech{
+		color: rgb(130, 130, 130);
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: center;
+	}
+  </style>
+</head>
+<body>
+
+	<script>
+	
+	//rating buttons
+		
+		function resetButtons(item){
+						item.classList.remove('is-selected');
+					};
+					
+		function buttonClick(number){
+			const button = document.querySelector(`#button${number}`);
+			const buttons = document.querySelectorAll('.rating-button');
+
+			buttons.forEach(resetButtons);
+			button.classList.add('is-selected');
+		};
+		
+		
+		//submit button
+		
+		function submitClick(){
+		//checking a rating has been selected
+		
+			rating = document.querySelector('.is-selected');
+			
+			if (rating === null){
+				return
+			};
+			
+		// selecting relevant sections into variables
+		
+			section1 = document.querySelector('.icon-container');
+			section2 = document.querySelector('.text-container');
+			section3 = document.querySelector('.rating-and-submit-container');
+			
+		//changing inner HTML
+			
+			section1.innerHTML = `<img class="thank-you-image"src="images/illustration-thank-you.svg" alt="">`;
+			section1.classList.add('section1-class');
+			
+			rating = rating.innerHTML
+			section2.innerHTML = `<p class="user-rating">You selected ${rating} out of 5</p>`
+			section2.classList.add('section2-class');
+			
+			section3.innerHTML = 
+			`
+				<p class="thank-you">Thank You!</p>
+				<p class="thank-you-speech">We appreciate you taking the time to give us a rating. If you ever need more support dont't hesitiate to get in touch</p>
+			`
+			section3.classList.add('section3-class');
+			
+		};
+	
+	</script>
+
+	<main>
+	<div class="content">
+		<section class="icon-container">
+			<img class="icon" src="images/icon-star.svg" alt="">
+		</section>
+
+		<section class="text-container">
+			<h1>How did we do?</h1>
+			<p class="text">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+		</section>
+
+		<section class="rating-and-submit-container">
+			<div class="rating-options">
+				<button class="rating-button" id="button1" onclick="
+					buttonClick('1');
+				">1</button>
+				<button class="rating-button" id="button2" onclick="
+					buttonClick('2');
+				">2</button>
+				<button class="rating-button" id="button3" onclick="
+					buttonClick('3');
+				">3</button>
+				<button class="rating-button" id="button4" onclick="
+					buttonClick('4');
+				">4</button>
+				<button class="rating-button" id="button5" onclick="
+					buttonClick('5');
+				">5</button>
+			</div>
+			<button class="submit-button" onclick="
+				submitClick();
+			">Submit</button>
+		</section>
+	</div>
+	</main>
+
+</body>
+</html>
